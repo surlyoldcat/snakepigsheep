@@ -1,0 +1,4418 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "Curriculum API",
+    "version" : "1.0.0",
+    "title" : "curriculum"
+  },
+  "host" : "active-curriculum-api.fendergarage.com",
+  "schemes" : [ "https" ],
+  "paths" : {
+    "/backing-tracks" : {
+      "get" : {
+        "summary" : "Get Backing Tracks",
+        "description" : "Get Backing Tracks for a song by title",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "slug",
+          "in" : "query",
+          "description" : "slug value for song or lesson title",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Returns a list of backing track titles and URLs",
+            "schema" : {
+              "$ref" : "#/definitions/BTListResponse"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              },
+              "Content-Type" : {
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "options" : {
+        "summary" : "Backing Tracks List Preflight",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/backing-tracks/presign" : {
+      "post" : {
+        "summary" : "Get Backing Track Upload URL",
+        "description" : "Gets a presigned URL for uploading backing tracks to S3",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "BTUploadUrlRequest",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/BTUploadUrlRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Returns an object containing a valid backing track upload URL",
+            "schema" : {
+              "$ref" : "#/definitions/BTUploadUrlResponse"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "options" : {
+        "summary" : "Backing Track URL Preflight",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/catalog/artists" : {
+      "get" : {
+        "summary" : "Get Artists",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "sortField",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "offset",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "status",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "ids",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "title",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/ArtistItemList"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              },
+              "Content-Type" : {
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "post" : {
+        "summary" : "Create Artists",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "ArtistItem",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/ArtistItem"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/ArtistItem"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "options" : {
+        "summary" : "Artists Preflight",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/catalog/artists/{id}" : {
+      "get" : {
+        "summary" : "Get Artist",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "artist id",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/ArtistItem"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "put" : {
+        "summary" : "Update Artist",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "artist id",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "ArtistItem",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/ArtistItem"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/ArtistItem"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "delete" : {
+        "summary" : "Delete Artist",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "artist id",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "204 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "options" : {
+        "summary" : "Artists by ID Preflight",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/catalog/songs" : {
+      "get" : {
+        "summary" : "Get Songs",
+        "description" : "Get songs by searching or IDs",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "sortField",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "description" : "max number of results to return",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "offset",
+          "in" : "query",
+          "description" : "offset of the first item in the response",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "status",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "ids",
+          "in" : "query",
+          "description" : "comma-delimited list of ids to retrieve",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "title",
+          "in" : "query",
+          "description" : "song title text",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/SongItemList"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              },
+              "Content-Type" : {
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "post" : {
+        "summary" : "Create Songs",
+        "description" : "Create a song item",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "SongItem",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/SongItem"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/SongItem"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "options" : {
+        "summary" : "Songs Preflight",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/catalog/songs/{id}" : {
+      "get" : {
+        "summary" : "Get Song",
+        "description" : "Get a song by its ID",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "song ID",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/SongItem"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "put" : {
+        "summary" : "Update Song",
+        "description" : "Update a song item",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "song ID",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "SongItem",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/SongItem"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/SongItem"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "delete" : {
+        "description" : "Delete Song",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "song ID",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "204 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "options" : {
+        "summary" : "Songs by ID Preflight",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "song ID",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/chords" : {
+      "get" : {
+        "summary" : "Get Chords",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "sortField",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "offset",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "status",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "ids",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "title",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/ChordItemList"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              },
+              "Content-Type" : {
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "post" : {
+        "summary" : "Create Chord",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "ChordItem",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/ChordItem"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/ChordItem"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "options" : {
+        "summary" : "Chords Preflight",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/chords/{id}" : {
+      "get" : {
+        "summary" : "Get Chord",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "chord ID",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/ChordItem"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "put" : {
+        "summary" : "Update Chord",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "ChordItem",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/ChordItem"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "delete" : {
+        "summary" : "Delete Chord",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "204 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "options" : {
+        "summary" : "Chords by ID Preflight",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/collections" : {
+      "get" : {
+        "summary" : "Get Collections",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "sortField",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "offset",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "status",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "ids",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "title",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/CollectionItemList"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              },
+              "Content-Type" : {
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "post" : {
+        "summary" : "Create Collections",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "CollectionItem",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/CollectionItem"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/CollectionItem"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "options" : {
+        "summary" : "Collections Preflight",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/collections-feeds" : {
+      "get" : {
+        "summary" : "Get CollectionFeed",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "sortField",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "offset",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "status",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "ids",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "title",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/CollectionFeedItemList"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              },
+              "Content-Type" : {
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "post" : {
+        "summary" : "Create CollectionFeed",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "CollectionFeedItem",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/CollectionFeedItem"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/CollectionFeedItem"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "options" : {
+        "summary" : "CollectionFeed Preflight",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/collections-feeds/{id}" : {
+      "get" : {
+        "summary" : "Get CollectionFeed",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "collection-feed id",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/CollectionFeedItem"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "put" : {
+        "summary" : "Update CollectionFeed",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "collection-feed id",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "CollectionFeedItem",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/CollectionFeedItem"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/CollectionFeedItem"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "delete" : {
+        "summary" : "Delete CollectionFeed",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "collection-feed id",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "204 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "options" : {
+        "summary" : "CollectionFeed by ID Preflight",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/collections/{id}" : {
+      "get" : {
+        "summary" : "Get Collection",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "collection id",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/CollectionItem"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "put" : {
+        "summary" : "Update Collection",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "collection id",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "CollectionItem",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/CollectionItem"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/CollectionItem"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "delete" : {
+        "summary" : "Delete Collection",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "collection id",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "204 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "options" : {
+        "summary" : "Collection by ID Preflight",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/courses" : {
+      "get" : {
+        "summary" : "Get Courses",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "sortField",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "offset",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "status",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "ids",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "title",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/CourseItemList"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              },
+              "Content-Type" : {
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "post" : {
+        "summary" : "Create Courses",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "CourseItem",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/CourseItem"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/CourseItem"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "options" : {
+        "summary" : "Courses Preflight",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/courses/{id}" : {
+      "get" : {
+        "summary" : "Get Course",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "course id",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/CourseItem"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "put" : {
+        "summary" : "Update Course",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "course id",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "CourseItem",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/CourseItem"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/CourseItem"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "delete" : {
+        "summary" : "Delete Course",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "course id",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "204 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "options" : {
+        "summary" : "Courses by ID Preflight",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/instructors" : {
+      "get" : {
+        "summary" : "Search Instructors",
+        "description" : "Search instructors",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "sortField",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "offset",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "status",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "ids",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "title",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/InstructorItemList"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              },
+              "Content-Type" : {
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "post" : {
+        "summary" : "Create Instructor",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "InstructorItem",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/InstructorItem"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/InstructorItem"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "options" : {
+        "summary" : "Instructors Preflight",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/instructors/{id}" : {
+      "get" : {
+        "summary" : "Get Instructor Item",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "instructor id",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/InstructorItem"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "put" : {
+        "summary" : "Update Instructor",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "instructor id",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "InstructorItem",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/InstructorItem"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "delete" : {
+        "summary" : "Delete Instructor",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "instructor id",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "204 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "options" : {
+        "summary" : "Instructor by ID Preflight",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "instructor id",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/lessons" : {
+      "get" : {
+        "summary" : "Get Lessons",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "sortField",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "offset",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "status",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "ids",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "title",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/LessonItemList"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              },
+              "Content-Type" : {
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "post" : {
+        "summary" : "Create Lessons",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "LessonItem",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/LessonItem"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/LessonItem"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "options" : {
+        "summary" : "Lessons Preflight",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/lessons/{id}" : {
+      "get" : {
+        "summary" : "Get Lesson",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "lesson id",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/LessonItem"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "put" : {
+        "summary" : "Update Lesson",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "lesson id",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "LessonItem",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/LessonItem"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/LessonItem"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "delete" : {
+        "summary" : "Delete Lesson",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "lesson id",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "204 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "options" : {
+        "summary" : "Lessons by ID Preflight",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/paths" : {
+      "get" : {
+        "summary" : "Get Paths",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "sortField",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "offset",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "status",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "ids",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "title",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/PathItemList"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              },
+              "Content-Type" : {
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "post" : {
+        "summary" : "Create Paths",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "PathItem",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/PathItem"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/PathItem"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "options" : {
+        "summary" : "Paths Preflight",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/paths/{id}" : {
+      "get" : {
+        "summary" : "Get Path",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "path id",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/PathItem"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "put" : {
+        "summary" : "Update Path",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "path id",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "PathItem",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/PathItem"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/PathItem"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "delete" : {
+        "summary" : "Delete Path",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "path id",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "204 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "options" : {
+        "summary" : "Paths by ID Preflight",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/playlists" : {
+      "get" : {
+        "summary" : "Get Playlists",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "sortField",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "offset",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "status",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "ids",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "title",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/PlaylistItemList"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              },
+              "Content-Type" : {
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "post" : {
+        "summary" : "Create Playlists",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "PlaylistItem",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/PlaylistItem"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/PlaylistItem"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "options" : {
+        "summary" : "Playlists Preflight",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/playlists/{id}" : {
+      "get" : {
+        "summary" : "Get Playlist",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "playlist id",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/PlaylistItem"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "put" : {
+        "summary" : "Update Playlist",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "playlist id",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "PlaylistItem",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/PlaylistItem"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/PlaylistItem"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "delete" : {
+        "summary" : "Delete Playlist",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "playlist id",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "204 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "options" : {
+        "summary" : "Playlists by ID Preflight",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/practice-sheets" : {
+      "get" : {
+        "summary" : "Get Practice Sheets",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "sortField",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "offset",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "status",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "ids",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "title",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/PracticeSheetItemList"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              },
+              "Content-Type" : {
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "post" : {
+        "summary" : "Create Practice Sheets",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "PracticeSheetItem",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/PracticeSheetItem"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/PracticeSheetItem"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "options" : {
+        "summary" : "Practice Sheets Preflight",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/practice-sheets/{id}" : {
+      "get" : {
+        "summary" : "Get Practice Sheet",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "practice-sheet id",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/PracticeSheetItem"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "put" : {
+        "summary" : "Update Practice Sheet",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "practice-sheet id",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "PracticeSheetItem",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/PracticeSheetItem"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/PracticeSheetItem"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "delete" : {
+        "summary" : "Delete Practice Sheet",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "practice-sheet id",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "204 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "options" : {
+        "summary" : "Practice Sheets by ID Preflight",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/songs-feeds" : {
+      "get" : {
+        "summary" : "Get SongFeed",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "sortField",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "offset",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "status",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "ids",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "title",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/SongFeedItemList"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              },
+              "Content-Type" : {
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "post" : {
+        "summary" : "Create SongFeed",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "SongFeedItem",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/SongFeedItem"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/SongFeedItem"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "options" : {
+        "summary" : "SongFeed Preflight",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/songs-feeds/{id}" : {
+      "get" : {
+        "summary" : "Get SongFeed",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "songfeed id",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/SongFeedItem"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "put" : {
+        "summary" : "Update SongFeed",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "songfeed id",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "SongFeedItem",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/SongFeedItem"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/SongFeedItem"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "delete" : {
+        "summary" : "Delete SongFeed",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "songfeed id",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "204 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "options" : {
+        "summary" : "SongFeed by ID Preflight",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tablature" : {
+      "get" : {
+        "summary" : "List Tablature",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/TablatureItemList"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              },
+              "Content-Type" : {
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "options" : {
+        "summary" : "List Tablature Preflight",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tablature/direct-upload/{file}" : {
+      "put" : {
+        "summary" : "Tab direct upload",
+        "description" : "Direct file upload to s3 for the tablature name specified at the end of the url path",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Content-Type",
+          "in" : "header",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "file",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Content-Length" : {
+                "type" : "string"
+              },
+              "Content-Type" : {
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "options" : {
+        "summary" : "Tab direct upload Preflight",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Content-Type",
+          "in" : "header",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "file",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tablature/initiate-upload" : {
+      "post" : {
+        "summary" : "Tab init upload",
+        "description" : "Get signed link to upload",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "TabInitRequest",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/TabInitRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/TabInitResponse"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Content-Length" : {
+                "type" : "string"
+              },
+              "Content-Type" : {
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "options" : {
+        "summary" : "Tab init upload Preflight",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/videos" : {
+      "get" : {
+        "summary" : "Get Videos",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "sortField",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "offset",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "status",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "ids",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "title",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/VideoItemList"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              },
+              "Content-Type" : {
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "options" : {
+        "summary" : "Videos Preflight",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/videos/{id}" : {
+      "get" : {
+        "summary" : "Get Video",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/VideoItem"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "put" : {
+        "summary" : "Update video",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "VideoItem",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/VideoItem"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/VideoItem"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "delete" : {
+        "summary" : "Delete Video",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "204 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Auth" : [ ]
+        } ]
+      },
+      "options" : {
+        "summary" : "Videos by ID Preflight",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions" : {
+    "JWT_Auth" : {
+      "type" : "apiKey",
+      "name" : "Authorization",
+      "in" : "header",
+      "x-amazon-apigateway-authtype" : "custom"
+    }
+  },
+  "definitions" : {
+    "PlaylistItemList" : {
+      "allOf" : [ {
+        "$ref" : "#/definitions/SearchMetaData"
+      }, {
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/definitions/PlaylistItem"
+            }
+          }
+        }
+      } ]
+    },
+    "PracticeSheetItem" : {
+      "allOf" : [ {
+        "$ref" : "#/definitions/CurriculumItem"
+      }, {
+        "type" : "object",
+        "required" : [ "lesson-id", "slug" ],
+        "properties" : {
+          "title" : {
+            "type" : "string",
+            "description" : "lesson title"
+          },
+          "slug" : {
+            "type" : "string",
+            "description" : "lesson slug"
+          },
+          "level" : {
+            "type" : "string",
+            "description" : "pick level for lesson"
+          },
+          "instrument" : {
+            "type" : "string",
+            "description" : "lesson instrument"
+          },
+          "tabs" : {
+            "type" : "array",
+            "description" : "lesson tabs",
+            "items" : {
+              "$ref" : "#/definitions/Tab"
+            }
+          },
+          "curriculum-id" : {
+            "type" : "string",
+            "description" : "curriculum id"
+          },
+          "lesson-id" : {
+            "type" : "string",
+            "description" : "related lesson id"
+          },
+          "backing-tracks" : {
+            "type" : "array",
+            "description" : "backing tracks",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "backing-track-status" : {
+            "type" : "string",
+            "description" : "backing track status"
+          },
+          "backing-tracks-count-in" : {
+            "type" : "integer",
+            "format" : "int32",
+            "description" : "count in for backing tracks"
+          }
+        }
+      } ]
+    },
+    "BTUploadUrlResponse" : {
+      "type" : "object",
+      "properties" : {
+        "URL" : {
+          "type" : "string"
+        }
+      }
+    },
+    "CollectionItemList" : {
+      "allOf" : [ {
+        "$ref" : "#/definitions/SearchMetaData"
+      }, {
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/definitions/CollectionItem"
+            }
+          }
+        }
+      } ]
+    },
+    "ArtistItem" : {
+      "allOf" : [ {
+        "$ref" : "#/definitions/CurriculumItem"
+      }, {
+        "type" : "object",
+        "required" : [ "hero-image", "name", "slug", "styles" ],
+        "properties" : {
+          "slug" : {
+            "type" : "string",
+            "description" : "artist slug"
+          },
+          "hero-image" : {
+            "type" : "string",
+            "description" : "hero image URL"
+          },
+          "thumbnail-image" : {
+            "type" : "string",
+            "description" : "thumbnail image URL"
+          },
+          "description-long" : {
+            "type" : "string",
+            "description" : "long description"
+          },
+          "description-short" : {
+            "type" : "string",
+            "description" : "short description"
+          },
+          "name" : {
+            "type" : "string",
+            "description" : "artist name"
+          },
+          "sort-name" : {
+            "type" : "string",
+            "description" : "artist name used for sorting"
+          },
+          "bio" : {
+            "type" : "string",
+            "description" : "artist bio"
+          },
+          "styles" : {
+            "type" : "array",
+            "description" : "styles of the artist",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "tags" : {
+            "type" : "array",
+            "description" : "tags applied to the artist",
+            "items" : {
+              "type" : "string"
+            }
+          }
+        }
+      } ]
+    },
+    "CurriculumItem" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "description" : "item ID"
+        },
+        "title" : {
+          "type" : "string",
+          "description" : "item title"
+        },
+        "description" : {
+          "type" : "string",
+          "description" : "item description"
+        },
+        "updated-at" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "time of last update"
+        },
+        "created-at" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "time of creation"
+        },
+        "start-at" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "time to make item publicly available"
+        },
+        "end-at" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "time to remove item from being publicly available"
+        },
+        "status" : {
+          "$ref" : "#/definitions/StatusEnum"
+        },
+        "created-by" : {
+          "type" : "string",
+          "description" : "user id of creator"
+        },
+        "updated-by" : {
+          "type" : "string",
+          "description" : "user id of last update"
+        }
+      }
+    },
+    "Activity" : {
+      "type" : "object",
+      "properties" : {
+        "activity-type" : {
+          "type" : "string",
+          "description" : "type of activity"
+        },
+        "id" : {
+          "type" : "string",
+          "description" : "id of activity"
+        }
+      }
+    },
+    "CourseItemList" : {
+      "allOf" : [ {
+        "$ref" : "#/definitions/SearchMetaData"
+      }, {
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/definitions/CourseItem"
+            }
+          }
+        }
+      } ]
+    },
+    "ChordItem" : {
+      "allOf" : [ {
+        "$ref" : "#/definitions/CurriculumItem"
+      }, {
+        "type" : "object",
+        "required" : [ "chord-id", "fingers", "name", "shape", "title" ],
+        "properties" : {
+          "chord-id" : {
+            "type" : "string",
+            "description" : "chord id"
+          },
+          "title" : {
+            "type" : "string",
+            "description" : "chord title"
+          },
+          "name" : {
+            "type" : "string",
+            "description" : "chord name"
+          },
+          "shape" : {
+            "type" : "string",
+            "description" : "chord shape"
+          },
+          "fingers" : {
+            "type" : "string",
+            "description" : "chord fingering"
+          },
+          "instrument" : {
+            "type" : "string",
+            "description" : "instrument the chord applies to"
+          }
+        }
+      } ]
+    },
+    "LessonItemList" : {
+      "allOf" : [ {
+        "$ref" : "#/definitions/SearchMetaData"
+      }, {
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/definitions/LessonItem"
+            }
+          }
+        }
+      } ]
+    },
+    "PathItem" : {
+      "allOf" : [ {
+        "$ref" : "#/definitions/CurriculumItem"
+      }, {
+        "type" : "object",
+        "required" : [ "instrument", "playlists", "preview-video-id", "slug", "title" ],
+        "properties" : {
+          "title" : {
+            "type" : "string"
+          },
+          "slug" : {
+            "type" : "string"
+          },
+          "preview-video-id" : {
+            "type" : "string"
+          },
+          "style" : {
+            "type" : "string"
+          },
+          "instrument" : {
+            "type" : "string"
+          },
+          "description-long" : {
+            "type" : "string"
+          },
+          "description-short" : {
+            "type" : "string"
+          },
+          "hero-image" : {
+            "type" : "string"
+          },
+          "thumbnail-image" : {
+            "type" : "string"
+          },
+          "playlists" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          }
+        }
+      } ]
+    },
+    "TablatureItem" : {
+      "type" : "object",
+      "properties" : {
+        "updated-by" : {
+          "type" : "string",
+          "description" : "user id of last update"
+        },
+        "updated-at" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "time of last update"
+        },
+        "chord-id" : {
+          "type" : "string",
+          "description" : "chord id"
+        },
+        "tab-title" : {
+          "type" : "string",
+          "description" : "tab title"
+        },
+        "tab-file" : {
+          "type" : "string",
+          "description" : "xml filename"
+        },
+        "status" : {
+          "type" : "string",
+          "description" : "storage status"
+        },
+        "message" : {
+          "type" : "string",
+          "description" : "status message"
+        }
+      }
+    },
+    "Empty" : {
+      "type" : "object",
+      "title" : "Empty Schema"
+    },
+    "ChapterCuepoint" : {
+      "type" : "object",
+      "properties" : {
+        "time" : {
+          "type" : "number",
+          "format" : "float32"
+        },
+        "title" : {
+          "type" : "string"
+        }
+      }
+    },
+    "PracticeSheetItemList" : {
+      "allOf" : [ {
+        "$ref" : "#/definitions/SearchMetaData"
+      }, {
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array"
+          }
+        }
+      } ]
+    },
+    "TabInitResponse" : {
+      "type" : "object",
+      "properties" : {
+        "upload_url" : {
+          "type" : "string",
+          "description" : "the S3 URL to upload the file to"
+        }
+      }
+    },
+    "SongFeedItem" : {
+      "allOf" : [ {
+        "$ref" : "#/definitions/CurriculumItem"
+      }, {
+        "type" : "object",
+        "required" : [ "instrument", "slug", "title" ],
+        "properties" : {
+          "title" : {
+            "type" : "string"
+          },
+          "slug" : {
+            "type" : "string"
+          },
+          "instrument" : {
+            "type" : "string"
+          },
+          "trending-songs-title" : {
+            "type" : "string"
+          },
+          "trending-songs" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "featured-songs-title" : {
+            "type" : "string"
+          },
+          "featured-songs" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "featured-artists-title" : {
+            "type" : "string"
+          },
+          "featured-artists" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "featured" : {
+            "type" : "boolean"
+          }
+        }
+      } ]
+    },
+    "SearchMetaData" : {
+      "type" : "object",
+      "properties" : {
+        "total" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "total number of results matching request critiera"
+        },
+        "count" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "number of results in the response"
+        },
+        "limit" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "maximum number of items requested"
+        },
+        "offset" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "offset into result set requested"
+        }
+      }
+    },
+    "BTUploadUrlRequest" : {
+      "type" : "object",
+      "properties" : {
+        "object-key" : {
+          "type" : "string"
+        }
+      }
+    },
+    "InstructorItem" : {
+      "allOf" : [ {
+        "$ref" : "#/definitions/CurriculumItem"
+      }, {
+        "type" : "object",
+        "required" : [ "name", "slug" ],
+        "properties" : {
+          "slug" : {
+            "type" : "string",
+            "description" : "URL slug"
+          },
+          "name" : {
+            "type" : "string",
+            "description" : "instructor name"
+          },
+          "image" : {
+            "type" : "string",
+            "description" : "instructor image"
+          }
+        }
+      } ]
+    },
+    "SongFeedItemList" : {
+      "allOf" : [ {
+        "$ref" : "#/definitions/SearchMetaData"
+      }, {
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/definitions/SongFeedItem"
+            }
+          }
+        }
+      } ]
+    },
+    "StatusEnum" : {
+      "type" : "string",
+      "description" : "item status",
+      "enum" : [ "published", "draft", "TODO are there more?" ],
+      "default" : "published"
+    },
+    "CollectionFeedItem" : {
+      "allOf" : [ {
+        "$ref" : "#/definitions/CurriculumItem"
+      }, {
+        "type" : "object",
+        "required" : [ "featured-collections", "featured-collections-title", "instrument", "slug", "title" ],
+        "properties" : {
+          "title" : {
+            "type" : "string"
+          },
+          "slug" : {
+            "type" : "string"
+          },
+          "instrument" : {
+            "type" : "string"
+          },
+          "featured-collections-title" : {
+            "type" : "string"
+          },
+          "featured-collections" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "featured" : {
+            "type" : "boolean"
+          }
+        }
+      } ]
+    },
+    "ArtistItemList" : {
+      "allOf" : [ {
+        "$ref" : "#/definitions/SearchMetaData"
+      }, {
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/definitions/ArtistItem"
+            }
+          }
+        }
+      } ]
+    },
+    "TimedAnnotation" : {
+      "type" : "object",
+      "properties" : {
+        "title" : {
+          "type" : "string"
+        },
+        "caption" : {
+          "type" : "string"
+        },
+        "start-time" : {
+          "type" : "number",
+          "format" : "float32"
+        },
+        "end-time" : {
+          "type" : "number",
+          "format" : "float32"
+        }
+      }
+    },
+    "CourseItem" : {
+      "allOf" : [ {
+        "$ref" : "#/definitions/CurriculumItem"
+      }, {
+        "type" : "object",
+        "required" : [ "activities", "instrument", "level", "slug", "title" ],
+        "properties" : {
+          "curriculum-id" : {
+            "type" : "string",
+            "description" : "curriculum id"
+          },
+          "title" : {
+            "type" : "string",
+            "description" : "course title"
+          },
+          "style" : {
+            "type" : "string",
+            "description" : "course style"
+          },
+          "slug" : {
+            "type" : "string",
+            "description" : "course slug"
+          },
+          "apple-affiliate-link" : {
+            "type" : "string",
+            "description" : "apple affiliate link"
+          },
+          "level" : {
+            "type" : "string",
+            "description" : "pick level for course"
+          },
+          "instrument" : {
+            "type" : "string",
+            "description" : "course instrument"
+          },
+          "type" : {
+            "type" : "string",
+            "description" : "course type"
+          },
+          "artist" : {
+            "type" : "string",
+            "description" : "course artist"
+          },
+          "artist-ids" : {
+            "type" : "array",
+            "description" : "course artist-ids",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "song" : {
+            "type" : "string",
+            "description" : "course song"
+          },
+          "song-id" : {
+            "type" : "string",
+            "description" : "id for course song"
+          },
+          "song-title" : {
+            "type" : "string",
+            "description" : "title for course song"
+          },
+          "description-long" : {
+            "type" : "string",
+            "description" : "long description of course"
+          },
+          "description-short" : {
+            "type" : "string",
+            "description" : "short description of course"
+          },
+          "hero-image" : {
+            "type" : "string",
+            "description" : "hero image for course"
+          },
+          "thumbnail-image" : {
+            "type" : "string",
+            "description" : "thumbnail image for course"
+          },
+          "mobile-listview-image" : {
+            "type" : "string",
+            "description" : "mobile listview image for course"
+          },
+          "lessons" : {
+            "type" : "array",
+            "description" : "lessons in course",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "activities" : {
+            "type" : "array",
+            "description" : "activities for course",
+            "items" : {
+              "$ref" : "#/definitions/Activity"
+            }
+          },
+          "instructor" : {
+            "type" : "string",
+            "description" : "course instructor"
+          }
+        }
+      } ]
+    },
+    "BTListItem" : {
+      "type" : "object",
+      "properties" : {
+        "slug" : {
+          "type" : "string"
+        },
+        "url" : {
+          "type" : "string"
+        }
+      }
+    },
+    "VideoItem" : {
+      "allOf" : [ {
+        "$ref" : "#/definitions/CurriculumItem"
+      }, {
+        "type" : "object",
+        "required" : [ "dirname", "duration", "hls-playlist", "mp4720p", "poster-generated-base", "thumb-generated-base" ],
+        "properties" : {
+          "curriculum-id" : {
+            "type" : "string",
+            "description" : "curriculum id"
+          },
+          "dirname" : {
+            "type" : "string",
+            "description" : "video directory name"
+          },
+          "background-instrument-sku" : {
+            "type" : "string",
+            "description" : "background instrument sku"
+          },
+          "amplifier-sku" : {
+            "type" : "string",
+            "description" : "amplifier sku"
+          },
+          "instructor-instrument-sku" : {
+            "type" : "string",
+            "description" : "instructor instrument sku"
+          },
+          "background-instrument-model" : {
+            "type" : "string",
+            "description" : "background instrument model"
+          },
+          "amplifier-model" : {
+            "type" : "string",
+            "description" : "amplifier model"
+          },
+          "instructor-instrument-model" : {
+            "type" : "string",
+            "description" : "instructor instrument model"
+          },
+          "location" : {
+            "type" : "string",
+            "description" : "video location"
+          },
+          "lesson-type" : {
+            "type" : "string",
+            "description" : "the lesson type"
+          },
+          "instructor" : {
+            "type" : "string",
+            "description" : "instructor ID"
+          },
+          "genre" : {
+            "type" : "string",
+            "description" : "video genre"
+          },
+          "level" : {
+            "type" : "string",
+            "description" : "difficulty level"
+          },
+          "bpm" : {
+            "type" : "integer",
+            "format" : "int32",
+            "description" : "bpm of video"
+          },
+          "capo" : {
+            "type" : "boolean",
+            "description" : "whether a capo is used"
+          },
+          "capo-fret" : {
+            "type" : "integer",
+            "format" : "int32",
+            "description" : "the fret the capo is on"
+          },
+          "song-key" : {
+            "type" : "string",
+            "description" : "the key of the song"
+          },
+          "version-number" : {
+            "type" : "string",
+            "description" : "video version number"
+          },
+          "version-notes" : {
+            "type" : "string",
+            "description" : "video version notes"
+          },
+          "publishing-cleared" : {
+            "type" : "boolean",
+            "description" : "whether publishing is cleared"
+          },
+          "mp4-file-name" : {
+            "type" : "string",
+            "description" : "mp4 file name"
+          },
+          "xml-file-name" : {
+            "type" : "string",
+            "description" : "xml file name"
+          },
+          "transcoding-status" : {
+            "type" : "string",
+            "description" : "transcoding status"
+          },
+          "transcoding-job-id" : {
+            "type" : "string",
+            "description" : "transcoding job id"
+          },
+          "transcoding-error" : {
+            "type" : "string",
+            "description" : "transcoding error"
+          },
+          "metadata-attached" : {
+            "type" : "string"
+          },
+          "hls-playlist" : {
+            "type" : "string"
+          },
+          "mp4480p" : {
+            "type" : "string"
+          },
+          "mp4720p" : {
+            "type" : "string"
+          },
+          "poster" : {
+            "type" : "string"
+          },
+          "poster-image-tool-id" : {
+            "type" : "string"
+          },
+          "duration" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "poster-generated-base" : {
+            "type" : "string"
+          },
+          "thumb-generated-base" : {
+            "type" : "string"
+          },
+          "chapter-cuepoints" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/definitions/ChapterCuepoint"
+            }
+          },
+          "timed-annotations" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/definitions/TimedAnnotation"
+            }
+          }
+        }
+      } ]
+    },
+    "VideoItemList" : {
+      "allOf" : [ {
+        "$ref" : "#/definitions/SearchMetaData"
+      }, {
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/definitions/VideoItem"
+            }
+          }
+        }
+      } ]
+    },
+    "PathItemList" : {
+      "allOf" : [ {
+        "$ref" : "#/definitions/SearchMetaData"
+      }, {
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/definitions/PathItem"
+            }
+          }
+        }
+      } ]
+    },
+    "SongItem" : {
+      "allOf" : [ {
+        "$ref" : "#/definitions/CurriculumItem"
+      }, {
+        "type" : "object",
+        "required" : [ "album-artwork", "styles" ],
+        "properties" : {
+          "album-artwork" : {
+            "type" : "string"
+          },
+          "copyright" : {
+            "type" : "string"
+          },
+          "apple-affiliate-link" : {
+            "type" : "string"
+          },
+          "google-affiliate-link" : {
+            "type" : "string"
+          },
+          "styles" : {
+            "type" : "string"
+          }
+        }
+      } ]
+    },
+    "Tab" : {
+      "type" : "object",
+      "properties" : {
+        "tab-file" : {
+          "type" : "string",
+          "description" : "file url for tab"
+        },
+        "tab-title" : {
+          "type" : "string",
+          "description" : "title of tab"
+        },
+        "tab-type" : {
+          "type" : "string",
+          "description" : "type of tab"
+        }
+      }
+    },
+    "InstructorItemList" : {
+      "allOf" : [ {
+        "$ref" : "#/definitions/SearchMetaData"
+      }, {
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/definitions/InstructorItem"
+            }
+          }
+        }
+      } ]
+    },
+    "LessonItem" : {
+      "allOf" : [ {
+        "$ref" : "#/definitions/CurriculumItem"
+      }, {
+        "type" : "object",
+        "required" : [ "activity-lesson-video", "instrument", "level", "slug", "title", "type" ],
+        "properties" : {
+          "curriculum-id" : {
+            "type" : "string",
+            "description" : "curriculum id"
+          },
+          "type" : {
+            "type" : "string",
+            "description" : "lesson type"
+          },
+          "title" : {
+            "type" : "string",
+            "description" : "lesson title"
+          },
+          "slug" : {
+            "type" : "string",
+            "description" : "lesson slug"
+          },
+          "level" : {
+            "type" : "string",
+            "description" : "pick level for lesson"
+          },
+          "instrument" : {
+            "type" : "string",
+            "description" : "lesson instrument"
+          },
+          "duration" : {
+            "type" : "integer",
+            "format" : "int32",
+            "description" : "lesson duration"
+          },
+          "techniques" : {
+            "type" : "array",
+            "description" : "lesson techniques",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "instructor" : {
+            "type" : "string",
+            "description" : "lesson instructor"
+          },
+          "chords" : {
+            "type" : "array",
+            "description" : "lesson chords",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "song" : {
+            "type" : "string",
+            "description" : "lesson song"
+          },
+          "song-key" : {
+            "type" : "string",
+            "description" : "key for lesson song"
+          },
+          "song-title" : {
+            "type" : "string",
+            "description" : "title for lesson song"
+          },
+          "description-long" : {
+            "type" : "string",
+            "description" : "long description of lesson"
+          },
+          "description-short" : {
+            "type" : "string",
+            "description" : "short description of lesson"
+          },
+          "hero-image" : {
+            "type" : "string",
+            "description" : "hero image for lesson"
+          },
+          "thumbnail-image" : {
+            "type" : "string",
+            "description" : "thumbnail image for lesson"
+          },
+          "activity-lesson-video" : {
+            "type" : "string",
+            "description" : "activity lesson video"
+          },
+          "activity-chord-diagrams" : {
+            "type" : "array",
+            "description" : "activity chord diagrams",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "activity-glossary-videos" : {
+            "type" : "array",
+            "description" : "activity glossary videos",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "related-lessons" : {
+            "type" : "array",
+            "description" : "related lessons",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "tabs" : {
+            "type" : "array",
+            "description" : "lesson tabs",
+            "items" : {
+              "$ref" : "#/definitions/Tab"
+            }
+          },
+          "backing-tracks" : {
+            "type" : "array",
+            "description" : "backing tracks",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "backing-track-status" : {
+            "type" : "string",
+            "description" : "backing track status"
+          },
+          "backing-tracks-count-in" : {
+            "type" : "integer",
+            "format" : "int32",
+            "description" : "count in for backing tracks"
+          },
+          "activity-type" : {
+            "type" : "string",
+            "description" : "activity type for lesson"
+          },
+          "practice-sheet-type" : {
+            "type" : "string",
+            "description" : "practice sheet type for lesson"
+          }
+        }
+      } ]
+    },
+    "ChordItemList" : {
+      "allOf" : [ {
+        "$ref" : "#/definitions/SearchMetaData"
+      }, {
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/definitions/ChordItem"
+            }
+          }
+        }
+      } ]
+    },
+    "BTListResponse" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/BTListItem"
+      }
+    },
+    "SongItemList" : {
+      "allOf" : [ {
+        "$ref" : "#/definitions/SearchMetaData"
+      }, {
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/definitions/SongItem"
+            }
+          }
+        }
+      } ]
+    },
+    "TabInitRequest" : {
+      "type" : "object",
+      "properties" : {
+        "filename" : {
+          "type" : "string",
+          "description" : "the name of the file to be uploaded"
+        }
+      }
+    },
+    "TablatureItemList" : {
+      "allOf" : [ {
+        "$ref" : "#/definitions/SearchMetaData"
+      }, {
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/definitions/TablatureItem"
+            }
+          }
+        }
+      } ]
+    },
+    "CollectionItem" : {
+      "allOf" : [ {
+        "$ref" : "#/definitions/CurriculumItem"
+      }, {
+        "type" : "object",
+        "required" : [ "courses", "curriculum-id", "instrument", "level", "slug" ],
+        "properties" : {
+          "hero-image" : {
+            "type" : "string"
+          },
+          "thumbnail-image" : {
+            "type" : "string"
+          },
+          "slug" : {
+            "type" : "string"
+          },
+          "level" : {
+            "type" : "string"
+          },
+          "curriculum-id" : {
+            "type" : "string"
+          },
+          "instrument" : {
+            "type" : "string"
+          },
+          "sequenced" : {
+            "type" : "boolean"
+          },
+          "courses" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          }
+        }
+      } ]
+    },
+    "CollectionFeedItemList" : {
+      "allOf" : [ {
+        "$ref" : "#/definitions/SearchMetaData"
+      }, {
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/definitions/CollectionFeedItem"
+            }
+          }
+        }
+      } ]
+    },
+    "PlaylistItem" : {
+      "allOf" : [ {
+        "$ref" : "#/definitions/CurriculumItem"
+      }, {
+        "type" : "object",
+        "required" : [ "courses", "instrument", "name", "slug", "title" ],
+        "properties" : {
+          "title" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "description-long" : {
+            "type" : "string"
+          },
+          "description-short" : {
+            "type" : "string"
+          },
+          "hero-image" : {
+            "type" : "string"
+          },
+          "thumbnail-image" : {
+            "type" : "string"
+          },
+          "level" : {
+            "type" : "string"
+          },
+          "slug" : {
+            "type" : "string"
+          },
+          "instrument" : {
+            "type" : "string"
+          },
+          "related-playlists" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "courses" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          }
+        }
+      } ]
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "publish_bucket": "active-platform-swaggerpub",
+  "aws_profile": "active",
+  "output_dir": "pub",
+  "apis": [
+    {
+      "id": "mh3ueqlih0",
+      "name": "subscriptions",
+      "stage": "active"
+    },
+    {
+      "id": "ffg8hy2ob6",
+      "name": "curriculum",
+      "stage": "active"
+    },
+    {
+      "id": "8ohhklieya",
+      "name": "user_service_lambdas",
+      "stage": "active"
+    }
+  ]
+}

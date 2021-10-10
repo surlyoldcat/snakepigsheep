@@ -1,0 +1,1694 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "version" : "1.0.1",
+    "title" : "subscriptions"
+  },
+  "host" : "active-subscriptions-api.fendergarage.com",
+  "schemes" : [ "https" ],
+  "paths" : {
+    "/appstore-sign-offer" : {
+      "get" : {
+        "summary" : "signs an appstore offer",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            }
+          }
+        }
+      }
+    },
+    "/appstore-transactions" : {
+      "post" : {
+        "summary" : "Update appstore transaction status",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            }
+          }
+        }
+      }
+    },
+    "/customer-support/subscriptions" : {
+      "post" : {
+        "summary" : "Customer Service Create a subscription",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "CreateSubscriptionRequest",
+          "description" : "Create a new subscription",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/CreateSubscriptionRequest"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "201 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            }
+          }
+        },
+        "security" : [ {
+          "cs_sub_authorization" : [ ]
+        } ]
+      },
+      "put" : {
+        "summary" : "Customer Service Update subscription to Pre-paid",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "CSUpdateSubscriptionRequest",
+          "description" : "Update a subscription",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/CSUpdateSubscriptionRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            }
+          }
+        },
+        "security" : [ {
+          "cs_sub_authorization" : [ ]
+        } ]
+      },
+      "options" : {
+        "summary" : "Subscription",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customer-support/subscriptions/ttl" : {
+      "delete" : {
+        "summary" : "Delete a ttl",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Authorization" : [ ]
+        } ]
+      },
+      "options" : {
+        "summary" : "Subscriptions TTL",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customer-support/subscriptions/user-subs" : {
+      "get" : {
+        "summary" : "Returns a user's subscriptions and other user-ids associated with it",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "user-id",
+          "in" : "query",
+          "description" : "ID used to look up their subscription",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/UserSubscriptionsResponse"
+            }
+          }
+        },
+        "security" : [ {
+          "cs_sub_authorization" : [ ]
+        } ]
+      },
+      "options" : {
+        "summary" : "Retrieve User Subscriptions",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/default-payment-method" : {
+      "put" : {
+        "summary" : "Update the default payment method",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Authorization" : [ ]
+        } ]
+      },
+      "options" : {
+        "summary" : "Default Payment Method",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/googleplay-transactions" : {
+      "post" : {
+        "summary" : "Update a Google Play transaction status",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      },
+      "options" : {
+        "summary" : "Google Play Transaction",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/iap-receipts" : {
+      "get" : {
+        "summary" : "gets all of a given users iap receipts",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Authorization" : [ ]
+        } ]
+      },
+      "options" : {
+        "summary" : "IAP receipts",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/payments" : {
+      "get" : {
+        "summary" : "List payments",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Authorization" : [ ]
+        } ]
+      },
+      "options" : {
+        "summary" : "Payments",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/prepaid/code/{code}" : {
+      "get" : {
+        "summary" : "Prepaid Code Status",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "code",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Authorization" : [ ]
+        } ]
+      },
+      "options" : {
+        "summary" : "Prepaid Code Status",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "code",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/prepaid/subscriptions" : {
+      "post" : {
+        "summary" : "Create a prepaid subscription",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Authorization" : [ ]
+        } ]
+      },
+      "options" : {
+        "summary" : "Prepaid Subscription",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/prepaid/subscriptions/renew" : {
+      "post" : {
+        "summary" : "Renew a prepaid subscription",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Authorization" : [ ]
+        } ]
+      },
+      "options" : {
+        "summary" : "Prepaid Subscription Renewal",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/promos/{code}/validate" : {
+      "get" : {
+        "summary" : "Validate a promo code",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "code",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Authorization" : [ ]
+        } ]
+      },
+      "options" : {
+        "summary" : "Promo code",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "code",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/subscription-types/{sku}" : {
+      "get" : {
+        "summary" : "Subscription Types by SKU",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "type",
+          "in" : "query",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "sku",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "country",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            }
+          }
+        }
+      },
+      "options" : {
+        "summary" : "Subscription Types by SKU",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "sku",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/refresh-receipt" : {
+      "post" : {
+        "summary" : "Refresh an IAP Receipt",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "RefreshReceiptRequest",
+          "description" : "Refresh an IAP Receipt",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/RefreshReceiptRequest"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "201 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Authorization" : [ ]
+        } ]
+      },
+      "options" : {
+        "summary" : "Refresh an IAP Receipt",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/refunds" : {
+      "post" : {
+        "summary" : "Create refund",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "201" : {
+            "description" : "201 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Authorization" : [ ]
+        } ]
+      },
+      "options" : {
+        "summary" : "Refund",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions" : {
+      "post" : {
+        "summary" : "Create a subscription",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "CreateSubscriptionRequest",
+          "description" : "Create a new subscription",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/CreateSubscriptionRequest"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "201 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Authorization" : [ ]
+        } ]
+      },
+      "delete" : {
+        "summary" : "Cancel a subscription",
+        "description" : "For Admin and CS users. Web only.",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Authorization" : [ ]
+        } ]
+      },
+      "options" : {
+        "summary" : "Subscription",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      },
+      "patch" : {
+        "summary" : "Renew a subscription",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "UpdateSubscriptionRequest",
+          "description" : "Renew a new subscription",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/UpdateSubscriptionRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Authorization" : [ ]
+        } ]
+      }
+    },
+    "/subscriptions-internal/status" : {
+      "get" : {
+        "summary" : "Subscription Status Internal",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "user-id",
+          "in" : "query",
+          "description" : "ID of user's subscription to check",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "sku-name",
+          "in" : "query",
+          "description" : "The name of the sku type to check e.g. 'play' or 'songs', defaults to 'play' if not provided",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/GetSubscriptionStatusResponse"
+            }
+          }
+        },
+        "security" : [ {
+          "sigv4" : [ ]
+        } ]
+      },
+      "options" : {
+        "summary" : "Subscription Status",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/admin" : {
+      "delete" : {
+        "summary" : "Delete subscription data",
+        "description" : "Delete user subscription data. Test environments only. Admin only.",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "user-id",
+          "in" : "query",
+          "description" : "user-id of subscription holder",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "sku-name",
+          "in" : "query",
+          "description" : "optional, default play. deletes the subscription for this sku-name (product). not to be confused with product-rate-plan-sku.",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "ok"
+          },
+          "400" : {
+            "description" : "parameter validation errors",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
+          },
+          "500" : {
+            "description" : "server error",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
+          },
+          "403" : {
+            "description" : "forbidden",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
+          },
+          "404" : {
+            "description" : "not found",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Authorization" : [ ]
+        } ]
+      },
+      "options" : {
+        "summary" : "Delete a subscription. Prod usage blocked.",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/credit" : {
+      "post" : {
+        "summary" : "Credit a subscription",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Authorization" : [ ]
+        } ]
+      },
+      "options" : {
+        "summary" : "Subscription Credit",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/freemium" : {
+      "post" : {
+        "summary" : "Start an unpaid trial",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "Empty",
+          "description" : "Create a new unpaid/freemium trial subscription",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/Empty"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "201 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Authorization" : [ ]
+        } ]
+      },
+      "options" : {
+        "summary" : "Subscription Unpaid Trial",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/lausd" : {
+      "post" : {
+        "summary" : "Create a subscription for lausd",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "Empty",
+          "description" : "Create a new subscription for lausd",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/Empty"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "201 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Authorization" : [ ]
+        } ]
+      },
+      "options" : {
+        "summary" : "Subscription LAUSD",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/location" : {
+      "get" : {
+        "summary" : "Retrieve Location Data",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "zipcode",
+          "in" : "query",
+          "description" : "Postal Code",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "country",
+          "in" : "query",
+          "description" : "ISO-3166 Alpha2 Country Code format",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Authorization" : [ ]
+        } ]
+      },
+      "options" : {
+        "summary" : "Retrieve Location Data",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "code",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/status" : {
+      "get" : {
+        "summary" : "Subscription Status",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "user-id",
+          "in" : "query",
+          "description" : "ID of user's subscription to check",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "sku-name",
+          "in" : "query",
+          "description" : "The name of the sku type to check e.g. 'play' or 'songs', defaults to 'play' if not provided",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/SubscriptionStatus"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Authorization" : [ ]
+        } ]
+      },
+      "options" : {
+        "summary" : "Subscription Status",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/summary" : {
+      "get" : {
+        "summary" : "Subscription summary",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "user-id",
+          "in" : "query",
+          "description" : "ID of user's subscription to check",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "sku-name",
+          "in" : "query",
+          "description" : "The name of the sku type to check e.g. 'play' or 'songs', defaults to 'play' if not provided",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/SubscriptionSummary"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Authorization" : [ ]
+        } ]
+      },
+      "options" : {
+        "summary" : "Subscription Summary",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transactions" : {
+      "get" : {
+        "summary" : "Transaction",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Authorization" : [ ]
+        } ]
+      },
+      "options" : {
+        "summary" : "Transactions",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/bless" : {
+      "put" : {
+        "summary" : "Bless a user account",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "JWT_Authorization" : [ ]
+        } ]
+      },
+      "options" : {
+        "summary" : "User Bless",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions" : {
+    "JWT_Authorization" : {
+      "type" : "apiKey",
+      "name" : "Authorization",
+      "in" : "header",
+      "x-amazon-apigateway-authtype" : "custom"
+    },
+    "cs_sub_authorization" : {
+      "type" : "apiKey",
+      "name" : "Authorization",
+      "in" : "header",
+      "x-amazon-apigateway-authtype" : "custom"
+    },
+    "sigv4" : {
+      "type" : "apiKey",
+      "name" : "Authorization",
+      "in" : "header",
+      "x-amazon-apigateway-authtype" : "awsSigv4"
+    }
+  },
+  "definitions" : {
+    "SubscriptionSummary" : {
+      "type" : "object",
+      "properties" : {
+        "user-id" : {
+          "type" : "string",
+          "description" : "User ID"
+        },
+        "subscription-status" : {
+          "type" : "string",
+          "description" : "state of the subscription"
+        },
+        "free" : {
+          "type" : "boolean",
+          "description" : "Represents if the subscription is free"
+        },
+        "is-trial" : {
+          "type" : "boolean",
+          "description" : "Represents if the subscription is in a trial state"
+        },
+        "is-iap" : {
+          "type" : "boolean",
+          "description" : "Represents if the subscription was created via IAP"
+        },
+        "is-google" : {
+          "type" : "boolean",
+          "description" : "Represents if the subscription is from a google IAP"
+        },
+        "is-apple" : {
+          "type" : "boolean",
+          "description" : "Represents if the subscription is from a apple IAP"
+        },
+        "product-rate-plan-sku" : {
+          "type" : "string",
+          "description" : "The product rate plan for the SKU"
+        },
+        "starts-on" : {
+          "type" : "string",
+          "description" : "The time the subscription starts"
+        },
+        "expires-on" : {
+          "type" : "string",
+          "description" : "The time the subscription expires"
+        },
+        "trial-starts-on" : {
+          "type" : "string",
+          "description" : "The time the trial period starts"
+        },
+        "trial-expires-on" : {
+          "type" : "string",
+          "description" : "The time the trial period expires"
+        },
+        "trial-days" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "The length of the trial period"
+        },
+        "provider-name" : {
+          "type" : "string",
+          "description" : "The company the subscription was purchased through"
+        },
+        "product-family" : {
+          "type" : "string",
+          "description" : "Used to represent what type of subscription the user has"
+        },
+        "paypal-email" : {
+          "type" : "string",
+          "description" : "The paypal email, if applicable"
+        },
+        "payment-method-type" : {
+          "type" : "string",
+          "description" : "The type of payment method"
+        },
+        "product-rate-plan-name" : {
+          "type" : "string",
+          "description" : "The name of the product rate plan"
+        },
+        "credit-card-number" : {
+          "type" : "string",
+          "description" : "The number of the credit card used"
+        },
+        "credit-card-last-4" : {
+          "type" : "string",
+          "description" : "The last 4 digits of the credit card used"
+        },
+        "credit-card-type" : {
+          "type" : "string",
+          "description" : "The type of credit card used"
+        },
+        "last-invoiced-on" : {
+          "type" : "string",
+          "description" : "The time the subscription was last invoiced"
+        },
+        "next-invoiced-on" : {
+          "type" : "string",
+          "description" : "The time the subscription will be invoiced next"
+        },
+        "current-plan" : {
+          "$ref" : "#/definitions/BillingItem"
+        },
+        "next-plan" : {
+          "$ref" : "#/definitions/BillingItem"
+        },
+        "billing-summary" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/BillingItem"
+          }
+        },
+        "stripe-customer-id" : {
+          "type" : "string",
+          "description" : "The stripe customer id, if applicable"
+        },
+        "access-level" : {
+          "type" : "array",
+          "description" : "subscription associated access levels",
+          "items" : {
+            "type" : "string"
+          }
+        }
+      },
+      "description" : "Subscription status response"
+    },
+    "Empty" : {
+      "type" : "object",
+      "title" : "Empty Schema"
+    },
+    "CSUpdateSubscriptionRequest" : {
+      "type" : "object",
+      "required" : [ "product-name", "product-rate-plan-sku", "user-id" ],
+      "properties" : {
+        "user-id" : {
+          "type" : "string",
+          "description" : "User ID"
+        },
+        "product-name" : {
+          "type" : "string",
+          "description" : "product name"
+        },
+        "product-rate-plan-sku" : {
+          "type" : "string",
+          "description" : "The product rate plan for the SKU"
+        }
+      },
+      "description" : "Create subscription request"
+    },
+    "UpdateSubscriptionRequest" : {
+      "type" : "object",
+      "required" : [ "product-rate-plan-sku", "source", "transaction-receipt", "user-id" ],
+      "properties" : {
+        "transaction-receipt" : {
+          "type" : "string",
+          "description" : "A base-64 encoded transaction receipt"
+        },
+        "user-id" : {
+          "type" : "string",
+          "description" : "User ID"
+        },
+        "source" : {
+          "type" : "string",
+          "description" : "source"
+        },
+        "product-rate-plan-sku" : {
+          "type" : "string",
+          "description" : "The product rate plan for the SKU"
+        }
+      },
+      "description" : "Create subscription request"
+    },
+    "SubscriptionStatus" : {
+      "type" : "object",
+      "properties" : {
+        "status" : {
+          "type" : "string",
+          "description" : "The subscriptions current status"
+        },
+        "free" : {
+          "type" : "boolean",
+          "description" : "The subscriptions blessed status"
+        },
+        "product-rate-plan-sku" : {
+          "type" : "string",
+          "description" : "The product rate plan for the SKU"
+        },
+        "created-at" : {
+          "type" : "string",
+          "description" : "The time the subscription was created at"
+        },
+        "is-iap" : {
+          "type" : "boolean",
+          "description" : "Represents if the subscription was created via IAP"
+        },
+        "payment-source" : {
+          "type" : "string",
+          "description" : "The source of the payment"
+        },
+        "access-level" : {
+          "type" : "array",
+          "description" : "associated subscription access levels",
+          "items" : {
+            "type" : "string"
+          }
+        }
+      },
+      "description" : "Subscription status response"
+    },
+    "UserSubscriptionsResponse" : {
+      "type" : "object",
+      "properties" : {
+        "product-rate-plan-sku" : {
+          "type" : "string",
+          "description" : "The product rate plan for the SKU"
+        },
+        "status" : {
+          "$ref" : "#/definitions/SubscriptionStatus"
+        },
+        "expires-on" : {
+          "type" : "string",
+          "description" : "The time the subscription expires"
+        },
+        "created-on" : {
+          "type" : "string",
+          "description" : "The time the subscription was created"
+        },
+        "user-id" : {
+          "type" : "string",
+          "description" : "User ID"
+        }
+      },
+      "description" : "User Subscriptions response"
+    },
+    "CreateSubscriptionRequest" : {
+      "type" : "object",
+      "required" : [ "country", "transaction-receipt", "user-id" ],
+      "properties" : {
+        "transaction-receipt" : {
+          "type" : "string",
+          "description" : "A base-64 encoded transaction receipt"
+        },
+        "user-id" : {
+          "type" : "string",
+          "description" : "User ID"
+        },
+        "country" : {
+          "type" : "string",
+          "description" : "Country"
+        },
+        "product-rate-plan-sku" : {
+          "type" : "string",
+          "description" : "The product rate plan for the SKU"
+        },
+        "product-sku" : {
+          "type" : "string",
+          "description" : "The product SKU"
+        }
+      },
+      "description" : "Create subscription request"
+    },
+    "RefreshReceiptRequest" : {
+      "type" : "object",
+      "required" : [ "id" ],
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "description" : "A receipt ID"
+        }
+      },
+      "description" : "Create subscription request"
+    },
+    "BillingItem" : {
+      "type" : "object",
+      "properties" : {
+        "charge-id" : {
+          "type" : "string",
+          "description" : "Zuora charge identifier"
+        },
+        "currency" : {
+          "type" : "string",
+          "description" : "Currency code"
+        },
+        "description" : {
+          "type" : "string",
+          "description" : "Description of the billing item"
+        },
+        "charge-type" : {
+          "type" : "string",
+          "description" : "The Zuora type of charge (flat, per, overage...)"
+        },
+        "product-rate-plan-name" : {
+          "type" : "string",
+          "description" : "Associated subscription rate plan name"
+        },
+        "product-rate-plan-sku" : {
+          "type" : "string",
+          "description" : "Associated subscription rate plan sku"
+        },
+        "charge-start-date" : {
+          "type" : "string",
+          "description" : "Start time for the charge duration"
+        },
+        "charge-end-date" : {
+          "type" : "string",
+          "description" : "End time for the charge duration"
+        },
+        "price" : {
+          "type" : "string",
+          "description" : "Price of the billing item"
+        }
+      },
+      "description" : "Represents a Zuora Billing Item"
+    },
+    "GetSubscriptionStatusResponse" : {
+      "type" : "object",
+      "properties" : {
+        "user-id" : {
+          "type" : "string",
+          "description" : "User ID"
+        },
+        "play" : {
+          "$ref" : "#/definitions/SubscriptionStatus"
+        }
+      },
+      "description" : "Subscription status response"
+    },
+    "ErrorResponse" : {
+      "type" : "object",
+      "required" : [ "id", "message", "status" ],
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "description" : "An apigw request ID"
+        },
+        "message" : {
+          "type" : "string",
+          "description" : "A message describing the error"
+        },
+        "status" : {
+          "type" : "string",
+          "description" : "HTTP status code"
+        }
+      },
+      "description" : "Container for error messages"
+    }
+  }
+}
