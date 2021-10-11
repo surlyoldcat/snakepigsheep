@@ -5,6 +5,8 @@ Swagger Sites
 - [Active](http://active-platform-swaggerpub.s3-website-us-east-1.amazonaws.com)
 - QA (TBD)
 
+Ideally, we would have a separate S3 site for each environment. Then run `publish_site` to populate the API sub-sites. Then `update_api` could be triggered from GitHub or CircleCI, to magically keep the API docs in sync with the environment.
+
 ## publish_site
 This utility will create or update a static site in S3 which contains multiple swagger-ui subsites, one per API. It also creates a very basic root index with links to each API subsite.
 
