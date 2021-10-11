@@ -13,11 +13,12 @@ from config import AppConfig, ApiInfo
 _root_dir = ""
 _site_dir = ""
 _swagger_filename = "exported-swagger.json"
+_config: AppConfig
 
 
-def upload_site(config: AppConfig):
+def upload_site():
     print("uploading site to S3...")
-    s3_sync_cmd = f"aws s3 sync {_site_dir} s3://{config.publish_bucket}/ --profile {config.aws_profile}"
+    s3_sync_cmd = f"aws s3 sync {_site_dir} s3://{_config.publish_bucket}/ --profile {_config.aws_profile}"
     try:
         retcode = subprocess.call(s3_sync_cmd, shell=True)
         print("S3 sync returned ", retcode, file=sys.stderr)
@@ -27,7 +28,7 @@ def upload_site(config: AppConfig):
 
 def fetch_swagger(api: ApiInfo) -> str:
     print(f"fetching swagger for {api.id}:{api.stage}")
-    session = boto3.Session(profile_name=c.aws_profile)
+    session = boto3.Session(profile_name=_config.aws_profile)
     apig = session.client('apigateway')
     response = apig.get_export(
         restApiId=api.id,
@@ -48,7 +49,7 @@ def create_api_dir(api_dir_name: str) -> str:
     return api_path
 
 
-def update_api_swagger(api_dir_path:str, api: ApiInfo):
+def update_api_swagger(api_dir_path: str, api: ApiInfo):
     swagger = fetch_swagger(api)
     out_file = os.path.join(api_dir_path, _swagger_filename)
     with open(out_file, 'w', encoding='utf-8') as export_file:
@@ -88,11 +89,11 @@ def create_api_link(dir_name: str, api_name:str) -> str:
     return t.format(apidir=dir_name, apiname=api_name)
 
 
-def publish(config: AppConfig):
+def publish():
     prepare_site_dir()
 
     index_links = []
-    for a in config.apis:
+    for a in _config.apis:
         api_nm = a.name
         print(f"processing api: {api_nm}")
         api_dir = api_nm.lower().replace(" ", "")
@@ -102,19 +103,19 @@ def publish(config: AppConfig):
         update_api_swagger(api_subdir, a)
 
     create_index_html(index_links)
-    upload_site(config)
+    upload_site()
     print("all done!")
 
 
 if __name__ == '__main__':
     _root_dir = os.path.dirname(os.path.realpath(__file__))
-    c = load_config()
-    site_dir_name = c.output_dir
+    _config = load_config()
+    site_dir_name = _config.output_dir
     if not site_dir_name.endswith('/'):
         site_dir_name += '/'
 
     _site_dir = os.path.join(_root_dir, site_dir_name)
     print(f"Root dir: {_root_dir}")
     print(f"Site dir: {_site_dir}")
-    publish(c)
+    publish()
 
